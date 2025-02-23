@@ -18,26 +18,26 @@
       "name": "Woolworths Supermarkets",
       "position": "Team Member",
       "url": "https://www.woolworths.com.au",
-      "startDate": "01-08-2023",
-      "endDate": "01-07-2024",
+      "startDate": "01/08/2023",
+      "endDate": "01/07/2024",
       "summary": "My key responsibilities were to be at the front of the store working the checkout or supervising the self-checkout area assisting customers with questions and processing of orders. I also took the opportunity to assist other departments when short-staffed restocking shelves, rotating and replenishing cold stock items."
     }
   ],
   "education": [
     {
-      "institution": "Macquarie University",
+      "institution": "    Macquarie University",
       "location": "North Ryde, New South Wales",
       "url": "https://www.mq.edu.au/",
-      "area": "Cyber Security",
-      "studyType": "Bachelors (Attending)",
-      "startDate": "24-02-2025",
-      "endDate": "EED. 01-01-2027"
+      "area": "   Cyber Security",
+      "studyType": "    Bachelors of Cyber Security",
+      "startDate": "24/02/2025",
+      "endDate": "Grad. 01/01/2027"
     }
   ],
   "awards": [
     {
       "title": "Top 5 Regionals Cyber Security",
-      "date": "07-11-2024",
+      "date": "07/11/2024",
       "awarder": "WorldSkills Australia",
       "url": "https://www.worldskills.org.au/",
       "summary": "Placed in the top 5 among 80 other competitors and qualified for the Nationals being held in Brisbane June 2025. This competition had us find flags in challenged ranging from Software cracking, Web Exploitation, SEIM Incident response, scripting and 'Real World Scenarios'"
@@ -46,21 +46,21 @@
   "certificates": [
     {
       "name": "Certificate IV in Cyber Security",
-      "date": "07-12-2024",
+      "date": "07/12/2024",
       "issuer": "TAFE NSW",
       "url": "https://www.tafensw.edu.au",
       "icon": "fa-solid fa-clipboard-check"
     },
     {
       "name": "Certificate IV in Information Technology (Networking)",
-      "date": "21-06-2024",
+      "date": "21/06/2024",
       "issuer": "TAFE NSW",
       "url": "https://www.tafensw.edu.au",
       "icon": "fa-solid fa-clipboard-check"
     },
     {
       "name": "Certificate III in Information Technology",
-      "date": "07-12-2023",
+      "date": "07/12/2023",
       "issuer": "TAFE NSW",
       "url": "https://www.tafensw.edu.au",
       "icon": "fa-solid fa-clipboard-check"
@@ -151,8 +151,8 @@
       "name": "Microsoft Azure Windows 10 RDP Honeypot for Brute-forcers",
       "summary": "On the Azure cloud I set up a Windows 10 instance and gave it a Public IP address and enabled the RDP port to allow for random people anywhere in the world to attempt to brute force their way into it and collected the failed attemps logs using the Logs and Analytics app in Azure and set up Microsofts SEIM called Sentinal to read logs and create incidents when it found a attempt or unauthorised login.",
       "highlights": ["Azure Cloud Experience", "Statistics on how Attackers brute force systems"],
-      "startDate": "29/01/2025",
-      "endDate": "07/02/2025",
+      "startDate": "29/01/25",
+      "endDate": "07/02/25",
       "url": "https://www.cyberawg.com/projects/Azure_SEIM_BruteForce/"
     }
   ]
