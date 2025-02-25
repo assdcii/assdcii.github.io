@@ -141,7 +141,8 @@
       "icon": "fa-solid fa-tag",
       "keywords": [
         "Ice Skating",
-        "Gym"
+        "Gym",
+        "Photography"
       ]
     }
   ],
@@ -153,7 +154,7 @@
       "highlights": ["Azure Cloud Experience", "Statistics on how Attackers brute force systems"],
       "startDate": "29/1/25",
       "endDate": "7/2/25",
-      "url": "https://www.cyberawg.com/projects/Azure_SEIM_BruteForce/"
+      "url": "https://assdcii.github.io/projects/Windows10_RDP_Honeypot/"
     }
   ]
 }
