@@ -39,12 +39,12 @@ from about `30 different contries`.
 
 # Results
 
-div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/Top10.png" title="Top 10 IP's" class="img-fluid rounded z-depth-1" %}
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/Top10.png" title="Top 10 IP's" class="img-fluid rounded z-depth-1" %}
     </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/top20.png" title="Top 20 Users" class="img-fluid rounded z-depth-1" %}
+    <div class="col-sm-4 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/top20.png" title="Top 20 Users" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -73,19 +73,18 @@ What im most intrested about is the `domain\` usage and the mispelt ADMINISTRATO
     wanted to remotely login to a account of the `Cherry` domain, could I just type in `DOMAIN\ADMINISTRATOR` and get access to the 
     domain administrator for Cherry?
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/wholeiprange.png" title="Vast IP Range" class="img-fluid rounded z-depth-1" %}
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/wholeiprange.png" title="Vast IP Range" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
     Its kind of hard to guadge, but this graph tries to visualise how many IP addresses attempted to sign in. There where a total of `118 different IP addresses`.
 </div>
 
-
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/inoneday.png" title="Total attempts in one day" class="img-fluid rounded z-depth-1" %}
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/inoneday.png" title="Total attempts in one day" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -138,17 +137,17 @@ for i in range(len(IPs)):     # loop
     with open(filename, "w") as f:
         f.write(str(response.text))             # save the output in a json file named with the IP
 ```
+{% endraw %}
 
 Now if I ran that script I would start getting an output that looks like this:
 
-{% endraw %}
 
-div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/running-script.jpg" title="Output of running script" class="img-fluid rounded z-depth-1" %}
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/running-script.jpg" title="Output of running script" class="img-fluid rounded z-depth-1" %}
     </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/post-script.jpg" title="Results of Script" class="img-fluid rounded z-depth-1" %}
+    <div class="col-sm-4 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/post-script.jpg" title="Results of Script" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
