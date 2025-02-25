@@ -389,6 +389,16 @@ ninja.data = [{
           description: "",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Private_Cloud_HomeLab/";
+            },},{id: "projects-mega-windows-amp-unix-recovery-stick",
+          title: 'Mega Windows &amp;amp; *Unix recovery stick',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/Recovery_USB_Stick/";
+            },},{id: "projects-spacehey-css-amp-html-customisation",
+          title: 'SpaceHey CSS &amp;amp; HTML Customisation',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/SpaceHey/";
             },},{id: "projects-windows-10-azure-rdp-honeypot",
           title: 'Windows 10 Azure RDP Honeypot',
           description: "Creating a Windows 10 machine on the Microsoft Azure Cloud and open the RDP Port to the internet to allow attackers to attempt to brute force the login.",
