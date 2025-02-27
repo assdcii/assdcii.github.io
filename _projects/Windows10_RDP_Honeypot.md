@@ -25,17 +25,67 @@ from about `30 different contries`.
 # Definitions
 - Brute Force
     - The act of attempting multiple times to guess a correct cridentials to gain `unauthorised or unintended access` into a system.
-- IDS
-    - Stands for `Intrution Detection System` and is a technology used to typicaly scan network traffic and compair it to a set of rules to 
-    determine if there is any suspicous or harmful network activity.
 - IP
     - Stands for `Internet Protocol`. This is the backbone of the mondern internet and is the thing that allows for communication between networks.
-    A IP Address will have 4 Octects and can range from 0-255. Example: 192.168.0.150, 5.254.33.111, 245.77.83.2
+    A IP Address will have 4 Octects and can range from 0-255. Example: `192.168.0.150 | 5.254.33.111 | 245.77.83.2`
 - RDP
     - Stands for `Remote Desktop Protocol` and is the protocol that allows a user who is not physicaly infront of the machine to sign into that 
-    windows computer. Its like having the computer monitor anywhere, you just have to sign in.
+    windows computer and instead allowing sign in through the network or internet. Its like having the computer monitor anywhere,
+     you just have to sign in.
+- Azure Sentinal
+    - Azure Sentinal is `Microsofts intigrated cloud SEIM solution` and is able to intake logs from various workspaces, read them and compare them to 
+    a set of rules to determine if there is any `suspicous activity`. People like `SOC Analysts` are then able to log into the portal to look at `cases, `
+    `incidents, create new rules, playbooks, send in KQL queries to gather log information, threat management and configuration for the intake of `
+    `logs, data connections and create automation rules.`
 
-# Expected results & method
+# Method
+
+-   In my results I want to find some of the top offenders and gather information on them and their habbits
+    - Attributes like Geo-location
+    - IP Reputation on public Blacklists
+    - Who their ISP is
+    - What user was attacked the most
+
+
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/Windows-machine.png" title="Windows 10 Config" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+First we need to create the Windows machine and configure it to have a uncommon and complex username and password and a public IP address.
+
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/azureSentinal.png" title="Azure Sentinal" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+Once the VM is up and running we can create the Sentinal solution, logs and analytics workspace and link it up to the Windows VM using the Data Connecters function
+
+The data connectors function allows the Windows VM to send all of its logs to the Logs and Analytics workspace so Sentinal can read them.
+
+<div class="row justify-content-sm-center">
+    <div class="col-sm-8 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/azuresentinal.png" title="Azure Sentinal" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
+The Medium alert has the following KQL Query
+
+{% raw %}
+```kql
+//Checks in the security event logs and discards any logs that have the user "SYSTEM" 
+//and looks for event code 4625 which is a failed login attempt
+SecurityEvent
+| where Account !has "SYSTEM" and EventID == "4625"
+```
+{% endraw %}
+
+The Successful login attempt rule has the exsact same query but the EventID is "4624".
+
+The query will run every 5 minutes and if there are matches then it will generate an incident. These incidents can have automated responses, playbooks and other
+automated tasks assigned to it.
 
 # Results
 
@@ -43,12 +93,9 @@ from about `30 different contries`.
     <div class="col-sm-8 mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/Top10.png" title="Top 10 IP's" class="img-fluid rounded z-depth-1" %}
     </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/top20.png" title="Top 20 Users" class="img-fluid rounded z-depth-1" %}
-    </div>
 </div>
 <div class="caption">
-    On the left is the `10 IP addresses` that sent out the most login attempts and the right image is the `20 most common users` that where guessed.
+    This image is the `10 IP addresses` that sent out the most login attempts.
 </div>
 
 Here on the left is just a nice visuilasation on what IP addresses are attacking the machine. We can see that `185.7.214.81` was very dedicated to 
@@ -58,20 +105,28 @@ in thousands of attempts in a short time frame then was never to be seen again.
 Although I didnt have any account restrictions or timeouts activated on the machine, but it seems like in a order to avoid or mask the fact that they 
 are trying to brute force their way in, they throuttle their pace.
 
-Im thinking there are 2 possible reasons
+-   Im thinking there are 2 possible reasons
     - They are attacking multiple machines and have `limmited bandwidth`
     - `Avoiding detection` either from any `Windows firewall, account, network policies` etc. or from a `IDS`
 
-Next image is the Top 20 users that where attacked.
+<div class="row justify-content-sm-center">
+    <div class="col-sm-4 mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/top20.png" title="Top 20 Users" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    This image is the `20 most common users` that where guessed.
+</div>
 
-This is in-line with the predicted guess as when you first create a Windows Server machine the default configuration will have the Administrator account
-active. Although it is good practice to not only `disable the Administrator account` but to also `restrict it` from even having the `ability to remotely connect`
+These are the most attacked accounts and they make sense. The default configuration on a Windows Server will have you create a password for the
+Administrator account and its unlikely that server administrators will want to change or disable the pre-made account as its the easier option. 
+Although it is good practice to not only `disable the Administrator account` but to also `restrict it` from even having the `ability to remotely connect`
 but im guessing this isnt as common as i'd like it to be. . .
 
-What im most intrested about is the `domain\` usage and the mispelt ADMINISTRATOR spelt `"ADMINISTRATEUR"`
+-   What im most intrested about is the `domain\` keyword
     - I want to test if using the `domain\<USER>` will allow you to connect to a domain you dont know. For example if I had a domain called `Cherry` and I
     wanted to remotely login to a account of the `Cherry` domain, could I just type in `DOMAIN\ADMINISTRATOR` and get access to the 
-    domain administrator for Cherry?
+    domain administrator for Cherry? Or will I have to actualy know the domain to sign into that domain administrator (`CHERRY\ADMINISTRATOR`).
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
@@ -91,9 +146,9 @@ What im most intrested about is the `domain\` usage and the mispelt ADMINISTRATO
     In the Azure console for Azure Sentinal, if I set the range to the period length we get to see the events generated and that the `30th` was the `most active day`.
 </div>
 
-If you wanted to download the raw CSV data 
-    - (results-sorted.csv)[assets/csv/results-sorted.csv]
-    - (duplicate-usernames.csv)[assets/csv/duplicate-usernames.csv]
+-   If you wanted to download the raw CSV data 
+    - [results-sorted.csv](assets/csv/results-sorted.csv)
+    - [duplicate-usernames.csv](assets/csv/duplicate-usernames.csv)
 
 The `results-sorted.csv` contains the extracted data from Azure Logs and Workspace analytics and has the `time generated, account, account type, computer, activity, ip address and logon type`.
 
@@ -126,7 +181,7 @@ for i in range(len(IPs)):     # loop
         "x-apikey": "<API-KEY>"     # Add in your API key
     }
 
-    response = requests.get(url, headers=headers)       # Send the response
+    response = requests.get(url, headers=headers)       # Send the request
 
     print(IPs[i], " Had a response code of ", response)     # feedback in terminal
 
@@ -146,12 +201,18 @@ Now if I ran that script I would start getting an output that looks like this:
     <div class="col-sm-8 mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/running-script.jpg" title="Output of running script" class="img-fluid rounded z-depth-1" %}
     </div>
+</div>
+<div class="caption">
+    This is the script outputting feedback in the terminal telling us what VirusTotals API response was (200 means good).
+</div>
+
+<div class="row justify-content-sm-center">
     <div class="col-sm-4 mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/post-script.jpg" title="Results of Script" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    On the left is the script outputting feedback in the terminal telling us what VirusTotals API response was (200 means good) and the left is the output of the api response stored in the json file with the ip address attached to it.
+    This is the output of the api response stored in the json file with the ip address attached to it.
 </div>
 
 With this new data in json format I was able to generate a cool looking `interactive heatmap` of what contries all of these IPs belonged to. 
